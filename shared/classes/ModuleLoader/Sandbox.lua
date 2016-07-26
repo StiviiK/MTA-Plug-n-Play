@@ -3,7 +3,7 @@ BASE_ENV = {}
 
 -- From https://github.com/APItools/sandbox.lua/blob/master/sandbox.lua#L51-L82
 ([[
-_VERSION assert error    ipairs   next pairs
+_VERSION assert error ipairs next pairs
 pcall print select tonumber tostring type unpack xpcall
 coroutine.create coroutine.resume coroutine.running coroutine.status
 coroutine.wrap   coroutine.yield
@@ -39,11 +39,4 @@ function Sandbox.create(sandbox, func)
         assert(status, result)
         return result
     end
-end
-
-local sandbox = Sandbox.init{}
-function Sandbox.test()
-    Sandbox.create(sandbox, function ()
-        
-    end)()
 end

@@ -14,11 +14,11 @@
     <script src="shared/classes/Promise.lua" type="shared"/>
     <script src="shared/classes/Stack.lua" type="shared"/>
     <script src="shared/classes/Hook.lua" type="shared"/>
+    <script src="shared/classes/ModuleLoader/Sandbox.lua" type="shared"/>
 
     <!-- Server -->
     <script src="server/classes/Core.lua" type="server"/>
     <script src="server/classes/Debug/Debugging.lua" type="server"/>
-    <script src="server/classes/ModuleLoader/Sandbox.lua" type="server"/>
     <script src="server/Main.lua" type="server"/>
 
 
