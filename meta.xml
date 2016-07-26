@@ -1,0 +1,23 @@
+<meta>
+    <info type="resource" name="PlugNPlay-Interface" author="StiviK" version="1.0"/>
+    <oop>true</oop>
+
+    <!-- Shared -->
+    <script src="shared/util.lua" type="shared"/>
+    <script src="shared/debug.lua" type="shared"/>
+    <script src="shared/classlib.lua" type="shared"/>
+    <script src="shared/async.lua" type="shared"/>
+    <script src="shared/crc32lua.lua" type="shared"/>
+    <script src="shared/classes/Object.lua" type="shared"/>
+    <script src="shared/classes/Singleton.lua" type="shared"/>
+    <script src="shared/classes/Thread.lua" type="shared"/>
+    <script src="shared/classes/Promise.lua" type="shared"/>
+    <script src="shared/classes/Stack.lua" type="shared"/>
+    <script src="shared/classes/Hook.lua" type="shared"/>
+
+    <!-- Server -->
+    <script src="server/classes/Core.lua" type="server"/>
+    <script src="server/classes/Debug/Debugging.lua" type="server"/>
+    <script src="server/classes/ModuleLoader/Sandbox.lua" type="server"/>
+    <script src="server/Main.lua" type="server"/>
+</meta>
