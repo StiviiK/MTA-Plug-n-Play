@@ -20,4 +20,13 @@
     <script src="server/classes/Debug/Debugging.lua" type="server"/>
     <script src="server/classes/ModuleLoader/Sandbox.lua" type="server"/>
     <script src="server/Main.lua" type="server"/>
+
+
+
+    <!-- ACL Request -->
+	<aclrequest>
+		<right name="function.startResource" access="true" />
+		<right name="function.stopResource" access="true" />
+		<right name="function.fetchRemote" access="true" />
+	</aclrequest>
 </meta>
