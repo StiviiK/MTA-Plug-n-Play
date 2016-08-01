@@ -14,8 +14,11 @@ math.min   math.modf math.pi    math.pow  math.rad   math.random
 math.sin   math.sinh math.sqrt  math.tan  math.tanh
 string.byte string.char  string.find  string.format string.gmatch
 string.gsub string.len   string.lower string.match  string.reverse
-string.sub  string.upper
+string.sub  string.upper setfenv
 table.insert table.maxn table.remove table.sort
+
+enew new delete super inherit _inheritIndex __removeElementIndex
+instanceof pure_virtual bind oop
 ]]):gsub('%S+', function(id)
   local module, method = id:match('([^%.]+)%.([^%.]+)')
   if module then
@@ -27,7 +30,7 @@ table.insert table.maxn table.remove table.sort
 end)
 
 function Sandbox.init(env)
-    return merge(env or {}, BASE_ENV)
+    return merge(merge(env or {}, PUBLIC_INTERFACES), BASE_ENV)
 end
 
 function Sandbox.create(sandbox, func)
@@ -39,4 +42,11 @@ function Sandbox.create(sandbox, func)
         assert(status, result)
         return result
     end
+end
+
+function Sandbox.test()
+    local sandbox = Sandbox.init()
+    Sandbox.create(sandbox, function ()
+       print(adg:new())
+    end)()
 end

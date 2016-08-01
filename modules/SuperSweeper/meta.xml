@@ -1,0 +1,5 @@
+<meta>
+	<script src="file3.lua" type="shared"/>
+	<script src="file1.lua" type="server"/>
+	<script src="file2.lua" type="client"/>
+</meta>

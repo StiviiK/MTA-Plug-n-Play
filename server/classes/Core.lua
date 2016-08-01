@@ -9,6 +9,22 @@ function Core:constructor()
         Debugging:new()
     end
 
+    -- MTA:Eir Filesystem
+    self.ms_FileSystem = createFilesystemInterface()
+    self.m_ModuleLocTranslator = self:createFSTranslator(BASE_MODULE_LOC_ABS)
 
-    -- Instantiate classes (Create objects) 
+    -- Instantiate classes (Create objects)
+    ModuleManager:new()
+end
+
+function Core:destructor()
+    delete(ModuleManager:getSingleton())
+end
+
+function Core:createFSTranslator(...)
+    return self.ms_FileSystem.createTranslator(...)
+end
+
+function Core:getModuleTranslator()
+    return self.m_ModuleLocTranslator
 end
