@@ -39,7 +39,9 @@ function Sandbox.create(sandbox, func)
 
     return function(...)
         local status, result = pcall(func, ...)
-        assert(status, result)
+        if status == false then
+            return false, result
+        end
         return result
     end
 end

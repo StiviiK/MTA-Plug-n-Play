@@ -1,16 +1,28 @@
 Module = inherit(Object)
 
 function Module:constructor(path)
+    ModuleManager:getSingleton():addRef(self)
     self.m_Name = path:gsub("/", "")
     self.m_Path = transformModulePath(path)
     self.m_Loader = ModuleLoader:new(self)
-    self.m_Loader:addFiles(self:parseMeta())
-    ModuleManager:getSingleton():addRef(self)
 
-
-    self.m_Loader.m_SandboxLoader()
-    outputDebug(_G["c"])
-    outputDebug(self.m_Loader.m_SandboxENV["c"])
+    local status, err = self.m_Loader:addFiles(self:parseMeta())
+    if status then
+        local status, err = self.m_Loader.m_SandboxLoader()
+        if status then
+            if _G["MODULE_TEST_VALUE"] then
+                outputDebug("WARNING: Your Sandbox isn't working correctly! For some reason MODULE_TEST_VALUE is global!")
+            else
+                outputDebug(("[%s] Module + Sandbox are working correctly! MODULE_TEST_VALUE is %s."):format(self:getName(), self.m_Loader.m_SandboxENV["MODULE_TEST_VALUE"]))    
+            end
+        else
+            delete(self)
+            outputDebug("2: "..tostring(err))    
+        end
+    else
+        delete(self)
+        outputDebug("1: "..tostring(err))    
+    end
 end
 
 function Module:destructor()
@@ -47,7 +59,5 @@ function Module:parseMeta()
 		end
 	end
     xmlUnloadFile(xml)
-
-    outputDebug(#server)
     return server, client
 end

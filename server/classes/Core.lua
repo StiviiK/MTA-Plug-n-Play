@@ -15,6 +15,10 @@ function Core:constructor()
 
     -- Instantiate classes (Create objects)
     ModuleManager:new()
+
+    setTimer(function ()
+        ModuleManager:getSingleton():init()
+    end, 50, 1)
 end
 
 function Core:destructor()

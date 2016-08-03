@@ -8,5 +8,6 @@ function Main.onStop()
 	print("Main.onStop")
 end
 function Main.onStart()
+	f()
 	print("Main.onStart")
 end

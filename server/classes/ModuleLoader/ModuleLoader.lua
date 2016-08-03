@@ -7,12 +7,17 @@ function ModuleLoader:constructor(module)
     self.m_SandboxLoader = Sandbox.create(self.m_SandboxENV, function ()
         for i, codeBlock in ipairs(self.m_Code) do
             setfenv(codeBlock, self.m_SandboxENV) -- we have to re-set the environment cause we have a new code block
-        	pcall(codeBlock)
+        	local status, result = pcall(codeBlock)
+            if status == false then
+                return false, result
+            end
         end 
 
         if Main then
             Main.onStart()
         end
+
+        return true
     end)
 end
 
@@ -28,7 +33,6 @@ function ModuleLoader:destructor()
 end
 
 function ModuleLoader:addFiles(files)
-	outputDebug(#files)
     for i, path in ipairs(files) do
         local path = ("%s%s"):format(self.m_Module:getPath(), path)
         if fileExists(path) then
@@ -37,13 +41,14 @@ function ModuleLoader:addFiles(files)
             local func, err = loadstring(file:read(file:getSize()))
             file:close()
 
-            if not err then
-                self.m_Code[#self.m_Code+1] = func
-            else
-                outputDebugString(("[%s]%s"):format(path, err:sub(25, #err)), 1)
-            end 
+            if err then
+                return false, err
+            end
+            self.m_Code[#self.m_Code+1] = func
         else
             outputDebug("File not Found: "..path)    
         end
     end
+
+    return true
 end

@@ -12,13 +12,3 @@ function Interface.onInherit(class)
         PUBLIC_INTERFACES[class.PUBLIC_NAME] = class
     end, 50, 1)
 end
-
-MyClass = inherit(Interface)
-MyClass.PUBLIC_NAME = "adg"
-function MyClass:constructor(n)
-    self.m_N = n
-end
-
-function MyClass:getN()
-    return self.m_N
-end
