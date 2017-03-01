@@ -18,7 +18,7 @@ string.sub  string.upper setfenv
 table.insert table.maxn table.remove table.sort
 
 enew new delete super inherit _inheritIndex __removeElementIndex
-instanceof pure_virtual bind oop
+instanceof pure_virtual bind oop fetchRemote
 ]]):gsub('%S+', function(id)
   local module, method = id:match('([^%.]+)%.([^%.]+)')
   if module then
@@ -37,18 +37,30 @@ function Sandbox.create(sandbox, func)
     if not sandbox or not func then return end
     setfenv(func, sandbox)
 
-    return function(...)
-        local status, result = pcall(func, ...)
-        if status == false then
-            return false, result
+    return Async.create(
+        function(...)
+            func(...)
+            -- return func(...) (Is useless, return values are ignored)
         end
-        return result
-    end
+    )
 end
 
 function Sandbox.test()
     local sandbox = Sandbox.init()
     Sandbox.create(sandbox, function ()
-       print(adg:new())
+       f = function()
+
+       end
+    end)()
+    
+    local sandbox2 = Sandbox.init()
+    Sandbox.create(sandbox2, function ()
+        print(f)
+        f = "fasf"
+        print(f)
+    end)()
+
+    Sandbox.create(sandbox, function ()
+        print(f)
     end)()
 end

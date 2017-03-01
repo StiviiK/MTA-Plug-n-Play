@@ -8,9 +8,7 @@ function ModuleLoader:constructor(module)
         for i, codeBlock in ipairs(self.m_Code) do
             setfenv(codeBlock, self.m_SandboxENV) -- we have to re-set the environment cause we have a new code block
         	local status, result = pcall(codeBlock)
-            if status == false then
-                return false, result
-            end
+            assert(status, result)
         end 
 
         if Main then

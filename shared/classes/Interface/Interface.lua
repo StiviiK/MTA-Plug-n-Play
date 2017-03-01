@@ -4,6 +4,7 @@ Interface.destructor  = pure_virtual
 PUBLIC_INTERFACES = {
     Object    = Object;
     Singleton = Singleton;
+    Async     = Async;
 }
 
 function Interface.onInherit(class)

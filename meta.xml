@@ -9,7 +9,7 @@
     <script src="shared/util.lua" type="shared"/>
     <script src="shared/debug.lua" type="shared"/>
     <script src="shared/classlib.lua" type="shared"/>
-    <script src="shared/async.lua" type="shared"/>
+    <script src="shared/classes/Interface/async.lua" type="shared"/>
     <script src="shared/crc32lua.lua" type="shared"/>
     <script src="shared/classes/Interface/Object.lua" type="shared"/>
     <script src="shared/classes/Interface/Singleton.lua" type="shared"/>

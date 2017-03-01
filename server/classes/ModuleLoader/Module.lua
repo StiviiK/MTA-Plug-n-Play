@@ -8,17 +8,9 @@ function Module:constructor(path)
 
     local status, err = self.m_Loader:addFiles(self:parseMeta())
     if status then
-        local status, err = self.m_Loader.m_SandboxLoader()
-        if status then
-            if _G["MODULE_TEST_VALUE"] then
-                outputDebug("WARNING: Your Sandbox isn't working correctly! For some reason MODULE_TEST_VALUE is global!")
-            else
-                outputDebug(("[%s] Module + Sandbox are working correctly! MODULE_TEST_VALUE is %s."):format(self:getName(), self.m_Loader.m_SandboxENV["MODULE_TEST_VALUE"]))    
-            end
-        else
-            delete(self)
-            outputDebug("2: "..tostring(err))    
-        end
+        self.m_Loader.m_SandboxLoader()
+        assert(_G["MODULE_TEST_VALUE"] == nil, "Sanbox is broken! MODULE_TEST_VALUE is public!")
+        assert(self.m_Loader.m_SandboxENV["MODULE_TEST_VALUE"] == 0x0, "Something went wrong, dunno what.")
     else
         delete(self)
         outputDebug("1: "..tostring(err))    
