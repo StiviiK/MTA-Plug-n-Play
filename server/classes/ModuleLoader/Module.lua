@@ -13,7 +13,7 @@ function Module:constructor(path)
         assert(self.m_Loader.m_SandboxENV["MODULE_TEST_VALUE"] == 0x0, "Something went wrong, dunno what.")
     else
         delete(self)
-        outputDebug("1: "..tostring(err))    
+        error(err)
     end
 end
 

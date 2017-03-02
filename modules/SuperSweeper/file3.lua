@@ -11,7 +11,9 @@ end
 function Main.onStart()
 	print("Main.onStart")
 	f()
-	
+
+	print(Player:getSingleton())
+
 	fetchRemote("page://error", Async.waitFor())
 	print(Async.wait())
 end

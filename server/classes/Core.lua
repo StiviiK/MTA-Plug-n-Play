@@ -18,7 +18,7 @@ function Core:constructor()
 
     setTimer(function ()
         ModuleManager:getSingleton():init()
-    end, 50, 1)
+    end, 1000, 1) -- Cause Interface.onInherit is slow!
 end
 
 function Core:destructor()

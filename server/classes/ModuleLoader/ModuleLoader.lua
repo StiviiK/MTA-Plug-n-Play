@@ -7,11 +7,10 @@ function ModuleLoader:constructor(module)
     self.m_SandboxLoader = Sandbox.create(self.m_SandboxENV, function ()
         for i, codeBlock in ipairs(self.m_Code) do
             setfenv(codeBlock, self.m_SandboxENV) -- we have to re-set the environment cause we have a new code block
-        	local status, result = pcall(codeBlock)
-            assert(status, result)
+            assert(pcall(codeBlock))
         end 
 
-        if Main then
+        if Main and Main.onStart then
             Main.onStart()
         end
 
@@ -20,7 +19,7 @@ function ModuleLoader:constructor(module)
 end
 
 function ModuleLoader:destructor()
-    if self.m_SandboxENV.Main then
+    if self.m_SandboxENV.Main and self.m_SandboxENV.Main.onStop then
         self.m_SandboxENV.Main.onStop()
     end
     for i, v in pairs(self.m_SandboxENV) do
